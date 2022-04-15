@@ -1,0 +1,7 @@
+torch
+torchvision
+tensorboard
+pandas
+scikit-learn
+bentoml>=1.0.0a
+tqdm
