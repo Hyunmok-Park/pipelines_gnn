@@ -78,4 +78,5 @@ def gnn_pipeline(
 if __name__ == '__main__':
     import kfp.compiler as compiler
     compiler.Compiler().compile(gnn_pipeline, __file__ + '.tar.gz')
+    # compiler.Compiler().compile(gnn_pipeline, __file__ + '.yaml')
 

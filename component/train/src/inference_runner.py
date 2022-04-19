@@ -102,7 +102,6 @@ class NeuralInferenceRunner(object):
     bentoml.build(
       "service.py:svc",
       include=["*.py"],
-      description="file:./README.md",
       python=dict(
         packages=["torch"]
       )
