@@ -67,7 +67,7 @@ class NodeGNN(nn.Module):
     y = self.output_func(torch.cat([state, b, -b], dim=1))
     y = torch.log_softmax(y, dim=1)
     loss = self.loss_func(y, target)
-    return y.detach.cpu(), loss.detach.cpu()
+    return y, loss
 
   def predict(self, J_msg, b, msg_node, prob_gt):
     J_msg = J_msg[0].long()
