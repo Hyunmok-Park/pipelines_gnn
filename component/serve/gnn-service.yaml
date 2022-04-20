@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: gnn-service
   labels:
-    app: gnn-application
+    run: gnn-service
 spec:
+  type: NodePort     # 서비스 타입
+  ports:
+    - port: 8080       # 서비스 포트
+      targetPort: 80   # 타켓, 즉 pod의 포트
+      nodePort: 31000
+      protocol: TCP
+      name: http
   selector:
     app: gnn-application
-  type: NodePort
-  ports:
-    - nodePort: 31000
-      ports: 80
-      targetport: 3000
