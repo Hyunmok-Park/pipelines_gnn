@@ -13,7 +13,7 @@ def PreprocessOp():
             'train_data': 'train_data.p',
             'val_data': 'val_data.p',
         }
-    )
+    ).add_pod_label("app", "gnn-application")
 
 def TrainOp(train_data, val_data, vop):
     return dsl.ContainerOp(
@@ -30,7 +30,7 @@ def TrainOp(train_data, val_data, vop):
           'mlpipeline-metrics': 'data/mlpipeline-metrics.json'
         },
         pvolumes={"src/data": vop},
-    )
+    ).add_pod_label("app", "gnn-application")
 
 def ServeOp(trainop):
     return dsl.ContainerOp(
@@ -40,7 +40,7 @@ def ServeOp(trainop):
             "sh", "run_serve_container.sh"
         ],
         pvolumes={"src/data": trainop.pvolume},
-    )
+    ).add_pod_label("app", "gnn-application")
 
 def VolumnOp():
     return dsl.PipelineVolume(
@@ -51,7 +51,6 @@ def VolumnOp():
     name='gnn_pipeline',
     description='Probabilistic inference with graph neural network'
 )
-
 def gnn_pipeline(
 ):
     print('gnn_pipeline')
@@ -77,6 +76,6 @@ def gnn_pipeline(
 
 if __name__ == '__main__':
     import kfp.compiler as compiler
-    compiler.Compiler().compile(gnn_pipeline, __file__ + '.tar.gz')
-    # compiler.Compiler().compile(gnn_pipeline, __file__ + '.yaml')
+    # compiler.Compiler().compile(gnn_pipeline, __file__ + '.tar.gz')
+    compiler.Compiler().compile(gnn_pipeline, __file__ + '.yaml')
 
