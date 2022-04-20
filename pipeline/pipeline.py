@@ -57,7 +57,7 @@ def gnn_pipeline(
 
     vop = VolumnOp()
 
-    dsl.get_pipeline_conf().set_image_pull_secrets([k8s_client.V1LocalObjectReference(name='regcred')])
+    dsl.get_pipeline_conf().set_image_pull_secrets([k8s_client.V1LocalObjectReference(name='regcredidc')])
 
     add_p = PreprocessOp()
 
